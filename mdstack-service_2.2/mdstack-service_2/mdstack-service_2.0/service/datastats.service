@@ -1,0 +1,10 @@
+[Unit]
+Description=Data Statistics
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/datastats_service.py
+
+[Install]
+WantedBy=multi-user.target

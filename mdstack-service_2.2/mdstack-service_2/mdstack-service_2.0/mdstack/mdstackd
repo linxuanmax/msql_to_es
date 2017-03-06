@@ -1,0 +1,221 @@
+#!/bin/bash
+
+# BEGIN INIT INFO
+# Provides:          mdstackd
+# Required-Start:    $all
+# Required-Stop:     $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Machine Data Stack daemon
+# Description:       Machine Data Stack daemon.
+# END INIT INFO
+
+MDSTACK_HOME=/usr/local/bin
+
+start_datastats(){
+    $MDSTACK_HOME/run_datastats.py --autostart
+}
+
+start_taskscheduler(){
+    $MDSTACK_HOME/run_taskscheduler.py --autostart
+}
+
+start_dataextraction(){
+    $MDSTACK_HOME/run_dataextraction.py --autostart
+}
+
+start_pullfiles(){
+    $MDSTACK_HOME/run_pullfiles.py --autostart
+}
+
+
+stop_datastats(){
+    $MDSTACK_HOME/run_datastats.py --stop
+}
+
+stop_taskscheduler(){
+    $MDSTACK_HOME/run_taskscheduler.py --stop
+}
+
+stop_dataextraction(){
+    $MDSTACK_HOME/run_dataextraction.py --stop
+}
+
+stop_pullfiles(){
+    $MDSTACK_HOME/run_pullfiles.py --stop
+}
+
+
+restart_datastats(){
+    $MDSTACK_HOME/run_datastats.py --restart
+}
+
+restart_taskscheduler(){
+    $MDSTACK_HOME/run_taskscheduler.py --restart
+}
+
+restart_dataextraction(){
+    $MDSTACK_HOME/run_dataextraction.py --restart
+}
+
+restart_pullfiles(){
+    $MDSTACK_HOME/run_pullfiles.py --restart
+}
+
+
+status_datastats(){
+    $MDSTACK_HOME/run_datastats.py --status
+}
+
+status_taskscheduler(){
+    $MDSTACK_HOME/run_taskscheduler.py --status
+}
+
+status_dataextraction(){
+    $MDSTACK_HOME/run_dataextraction.py --status
+}
+
+status_pullfiles(){
+    $MDSTACK_HOME/run_pullfiles.py --status
+}
+
+
+usage(){
+    echo ""
+    echo "Usage:"
+    echo "* datastats or taskscheduler or dataextraction or pullfiles"
+    echo "sudo service mdstackd start [datastats|taskscheduler|dataextraction|pullfiles]"
+    echo "sudo service mdstackd stop [datastats|taskscheduler|dataextraction|pullfiles]"
+    echo "sudo service mdstackd restart [datastats|taskscheduler|dataextraction|pullfiles]"
+    echo "sudo service mdstackd status [datastats|taskscheduler|dataextraction|pullfiles]"
+    echo ""
+}
+
+case "$1" in
+    start)
+        case "$2" in
+            datastats)
+                start_datastats
+                echo ""
+                ;;
+            taskscheduler)
+                start_taskscheduler
+                echo ""
+                ;;
+            dataextraction)
+                start_dataextraction
+                echo ""
+                ;;
+            pullfiles)
+                start_pullfiles
+                echo ""
+                ;;
+            "")
+                start_datastats
+                start_taskscheduler
+                start_dataextraction
+                start_pullfiles
+                echo ""
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    stop)
+        case "$2" in
+            datastats)
+                stop_datastats
+                echo ""
+                ;;
+            taskscheduler)
+                stop_taskscheduler
+                echo ""
+                ;;
+            dataextraction)
+                stop_dataextraction
+                echo ""
+                ;;
+            pullfiles)
+                stop_pullfiles
+                echo ""
+                ;;
+            "")
+                stop_datastats
+                stop_taskscheduler
+                stop_dataextraction
+                stop_pullfiles
+                echo ""
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    restart)
+        case "$2" in
+            datastats)
+                restart_datastats
+                echo ""
+                ;;
+            taskscheduler)
+                restart_taskscheduler
+                echo ""
+                ;;
+            dataextraction)
+                restart_dataextraction
+                echo ""
+                ;;
+            pullfiles)
+                restart_pullfiles
+                echo ""
+                ;;
+            "")
+                restart_datastats
+                restart_taskscheduler
+                restart_dataextraction
+                restart_pullfiles
+                echo ""
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    status)
+        case "$2" in
+            datastats)
+                status_datastats
+                echo ""
+                ;;
+            taskscheduler)
+                status_taskscheduler
+                echo ""
+                ;;
+            dataextraction)
+                status_dataextraction
+                echo ""
+                ;;
+            pullfiles)
+                status_pullfiles
+                echo ""
+                ;;
+            "")
+                status_datastats
+                status_taskscheduler
+                status_dataextraction
+                status_pullfiles
+                echo ""
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac
+
+exit 0
+

@@ -1,0 +1,10 @@
+[Unit]
+Description=Pull Files
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/pullfiles_service.py
+
+[Install]
+WantedBy=multi-user.target

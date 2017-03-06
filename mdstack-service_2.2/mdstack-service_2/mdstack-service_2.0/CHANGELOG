@@ -1,0 +1,21 @@
+0.99.2 2014/07/17
+  - mdstack/esdata.py
+  1. pyes.query.StringQuery 改为
+     pyes.query.QueryStringQuery  （两处）
+  2. 新增 search = pyes.query.Search( query = query, start = 0, size = 0, fields = [] )
+  3. cnt += es.count( query=query, indices=index )['count'] 改为
+     cnt += es.search(search, indices=index).total
+  4. search = pyes.query.Search( query=query, start=istart, size=isize, sort=[{FIELDTIME:"desc"}], fields=fields ) 改为
+     search = pyes.query.Search( query=query, start=istart, size=isize, sort=[{FIELDTIME:"desc"}], _source=fields )
+     ** 注意：引用过esdata.py中search功能的模块也需要进行修改
+
+
+  - mdstack/estats.py
+  1. pyes.query.StringQuery 改为
+     pyes.query.QueryStringQuery
+  2. 新增 search = pyes.query.Search( query = query, start = 0, size = 0, fields = [] )
+  3. cnt += es.count(query=query, indices=index)['count'] 改为
+     cnt += es.search(search, indices=index).total
+
+  - custom_dashboard/firewall_dashboard.py
+  

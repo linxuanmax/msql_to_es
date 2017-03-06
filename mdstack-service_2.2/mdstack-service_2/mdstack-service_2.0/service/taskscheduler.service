@@ -1,0 +1,10 @@
+[Unit]
+Description=Task Scheduler
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/taskscheduler_service.py
+
+[Install]
+WantedBy=multi-user.target
